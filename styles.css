@@ -54,7 +54,7 @@
 =========================================================== */
 *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
 
-html{ scroll-behavior:smooth; -webkit-tap-highlight-color: transparent; }
+html{ scroll-behavior:smooth; -webkit-tap-highlight-color: transparent; overflow-x:hidden; }
 
 
 body{
@@ -518,6 +518,9 @@ ul{ list-style:none; }
   .hero-cta-row .btn{ width:100%; }
   .hero-visual{ display:none; }
   .scroll-cue{ display:none; }
+  .role-line{ min-width:0; }
+  .role-rotator{ min-width:0; width:100%; }
+  .role-word{ white-space:normal; word-break:break-word; }
 }
 
 /* reduced motion */
