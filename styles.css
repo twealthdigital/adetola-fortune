@@ -695,7 +695,8 @@ ul{ list-style:none; }
 .proj-card{
   position:absolute; top:0; height:100%; display:flex;
   transition:left .6s cubic-bezier(.65,0,.35,1), width .6s cubic-bezier(.65,0,.35,1), opacity .5s ease, transform .6s cubic-bezier(.65,0,.35,1);
-  will-change:left, width, opacity, transform;
+  will-change:transform, opacity;
+  contain:layout paint;
 }
 .proj-card.no-transition,
 .proj-card.no-transition .proj-media,
@@ -781,6 +782,9 @@ ul{ list-style:none; }
   .proj-card[data-pos="0"]{ left:0; width:100%; flex-direction:column; }
   .proj-card[data-pos="0"] .proj-media{ width:100%; height:60%; align-self:flex-start; }
   .proj-card[data-pos="0"] .proj-text{ width:100%; flex:0 0 40%; height:40%; padding:16px 0 0; }
+  .proj-card{ transition: left .3s ease, opacity .25s ease, transform .3s ease; }
+  .proj-media{ transition: none; box-shadow:none; }
+  .proj-text{ transition: opacity .25s ease; }
 }
 @media (min-width:861px) and (max-width:1080px){
   .slider-nav{ position:relative; top:0px; left:-500px; }
