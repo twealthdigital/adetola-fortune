@@ -195,8 +195,6 @@ const projects = [
   { title: "YTGT Corporate Website", sub: "Technology Company • Website Design, Development & UIUX Services ", desc: "Designed and developed a modern corporate website for YTGT, featuring responsive design, engaging animations, service showcases, and a conversion-focused user experience to strengthen the company's online presence.", img: "ytreakproject.webp", link: "http://ytreakglobaltechnology.vercel.app/" },
   { title: "MM Beauty Ecommerce Website", sub: "Ecommerce Company • Beauty, Baby & Skin Care Products", desc: "Designed and developed a clean, conversion-focused online store for Margaret's Market, featuring beauty product collections, category browsing, customer reviews, promotional sections, and a seamless shopping experience optimized for desktop and mobile devices.", img: "mmbeautyproject.webp", link: "https://mmbeautyshop.com/" },
   { title: "Project Three", sub: "Cyber Company • CyberSecurity, Ethical Hacking & Pen-Testing Website", desc: "Designed and developed a modern cybersecurity website for Valiant Cyber Solutions, showcasing penetration testing, red teaming, vCISO services, threat intelligence, and a professional, conversion-focused user experience.", img: "valiantcyberproject.webp", link: "https://valiantcyber.io/" },
-  { title: "Project Four", sub: "AI Product", desc: "Short description of project four goes here.", img: "projects/project4.jpg", link: "#" },
-  { title: "Project Five", sub: "Landing Page", desc: "Short description of project five goes here.", img: "projects/project5.jpg", link: "#" }
   // just keep adding objects here — 6, 20, 100, doesn't matter, only 5 DOM cards ever exist
 ];
 
@@ -345,7 +343,7 @@ const projects = [
   const nextBtn = document.getElementById('sliderNext');
   const prevBtn = document.getElementById('sliderPrev');
 
-nextBtn.addEventListener('click', () => { next(); });
+  nextBtn.addEventListener('click', () => { next(); });
   prevBtn.addEventListener('click', () => { prev(); });
 
   let touchStartX = 0;
