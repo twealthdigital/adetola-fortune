@@ -149,3 +149,38 @@ document.addEventListener('DOMContentLoaded', () => {
       codeToggle.setAttribute('aria-expanded', String(!isCollapsed));
     });
   }
+
+
+  /* ---------- ABOUT STATS COUNTER ---------- */
+  const statNumbers = document.querySelectorAll('.stat-number');
+
+  if (statNumbers.length) {
+    const animateCount = (el) => {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const duration = 1200;
+      const startTime = performance.now();
+
+      const step = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        el.textContent = Math.floor(eased * target);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = target;
+        }
+      };
+      requestAnimationFrame(step);
+    };
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    statNumbers.forEach(el => statObserver.observe(el));
+  }
