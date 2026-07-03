@@ -363,3 +363,118 @@ const projects = [
 
   setup();
 })();
+/* ---------- SKILLS TABS ---------- */
+(() => {
+  const skillsData = {
+    frontend: {
+      label: 'Frontend Development',
+      desc: 'I build fast, responsive interfaces that feel great on every screen.',
+      video: 'frontendvideo.mp4',
+      img: 'skills/frontend.webp',
+      list: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'React.js', 'Redux Toolkit', 'Responsive Design', 'CSS Animations', 'Progressive Web Apps', 'Figma to Code']
+    },
+    prompting: {
+      label: 'AI Prompt Engineering',
+      desc: 'I know how to talk to AI, and which tool to reach for depending on the job.',
+      video: 'aipromptingvideo.mp4',
+      img: 'skills/prompting.webp',
+      list: ['Claude Code', 'DeepSeek', 'Claude AI', 'ChatGPT', 'Codex', 'Grok', 'Gemini', 'Replit', 'Lovable', 'Base44', 'Cursor', 'Perplexity', 'n8n', 'Midjourney']
+    },
+    mobile: {
+      label: 'Mobile App Development',
+      desc: 'I turn ideas into smooth, cross-platform mobile experiences.',
+      video: 'mobileappvideo.mp4',
+      img: 'skills/mobile.webp',
+      list: ['React Native', 'Expo', 'Redux Toolkit', 'Mobile UI/UX', 'App State Management', 'Push Notifications', 'Native APIs']
+    },
+    ai: {
+      label: 'AI & Automation',
+      desc: 'I connect AI models into products that solve real problems.',
+      video: 'aiautomationvideo.mp4',
+      img: 'skills/ai.webp',
+      list: ['AI Integration', 'Prompt Engineering', 'Automation Workflows', 'Chatbot Development', 'Multimodal Input', 'LLM-Powered Apps', 'AI Automations & Workflows', 'AI-Driven Content Generation', 'AI-Powered Analytics & Insights']
+    },
+    design: {
+      label: 'Design & Tools',
+      desc: 'I design clean, intentional interfaces before I ever write code.',
+      video: 'designvideo.mp4',
+      img: 'skills/design.webp',
+      list: ['WebFlow', 'WordPress / Elementor', 'Graphics Design', 'Design Systems', 'UI/UX Design', 'Wireframing', 'Prototyping', 'Wix']
+    }
+  };
+
+  const tabs = document.querySelectorAll('.skill-tab');
+  const title = document.getElementById('skillsContentTitle');
+  const desc = document.getElementById('skillsDesc');
+  const list = document.getElementById('skillsList');
+  const video = document.getElementById('skillsVideo');
+  const img = document.getElementById('skillsImg'); // stays null unless the <img> tag is uncommented
+  const media = document.querySelector('.skills-media');
+  const content = document.querySelector('.skills-content');
+
+  if (!tabs.length) return;
+
+  let switching = false;
+
+  const applySkill = (key) => {
+    const data = skillsData[key];
+    if (!data) return;
+
+    title.textContent = data.label;
+    desc.textContent = data.desc;
+
+    list.innerHTML = '';
+    data.list.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      list.appendChild(li);
+    });
+
+    if (video) {
+      const source = video.querySelector('source');
+      source.src = data.video;
+      video.load();
+      video.play().catch(() => {});
+    }
+
+    if (img) {
+      img.src = data.img;
+      img.alt = data.label;
+    }
+  };
+
+  const renderSkill = (key, animate = true) => {
+    if (!animate) { applySkill(key); return; }
+    if (switching) return;
+    switching = true;
+
+    media.classList.add('skills-fade-out');
+    content.classList.add('skills-fade-out');
+
+    setTimeout(() => {
+      applySkill(key);
+
+      media.classList.remove('skills-fade-out');
+      content.classList.remove('skills-fade-out');
+      media.classList.add('skills-fade-in');
+      content.classList.add('skills-fade-in');
+
+      setTimeout(() => {
+        media.classList.remove('skills-fade-in');
+        content.classList.remove('skills-fade-in');
+        switching = false;
+      }, 350);
+    }, 250);
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (tab.classList.contains('is-active')) return;
+      tabs.forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      renderSkill(tab.dataset.skill);
+    });
+  });
+
+  renderSkill(tabs[0].dataset.skill, false);
+})();
