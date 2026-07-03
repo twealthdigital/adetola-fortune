@@ -520,14 +520,14 @@
               </div>
               <div class="stat-item">
                 <span class="stat-value"
-                  ><span class="stat-number" data-target="25">0</span
+                  ><span class="stat-number" data-target="10">0</span
                   ><span class="stat-plus">+</span></span
                 >
                 <span class="stat-label">Projects Done</span>
               </div>
               <div class="stat-item">
                 <span class="stat-value"
-                  ><span class="stat-number" data-target="15">0</span
+                  ><span class="stat-number" data-target="9">0</span
                   ><span class="stat-plus">+</span></span
                 >
                 <span class="stat-label">Happy Clients</span>
@@ -546,8 +546,11 @@
             </h2>
           </div>
 
-          <div class="skills-tabs" id="skillsTabs">
-            <button class="skill-tab is-active" data-skill="frontend">
+          <div class="skills-tabs-wrap" id="skillsTabsWrap">
+  <button class="skills-tab-arrow skills-tab-prev" id="skillsTabPrev" aria-label="Scroll tabs left">&#8249;</button>
+
+  <div class="skills-tabs" id="skillsTabs">
+    <button class="skill-tab is-active" data-skill="frontend">
               Frontend Development
             </button>
             <button class="skill-tab" data-skill="prompting">
@@ -562,7 +565,8 @@
             <button class="skill-tab" data-skill="design">
               Design &amp; Tools
             </button>
-          </div>
+          <button class="skills-tab-arrow skills-tab-next" id="skillsTabNext" aria-label="Scroll tabs right">&#8250;</button>
+</div>
 
           <div class="skills-panel">
             <div class="skills-media">
@@ -577,6 +581,7 @@
               >
                 <source src="skills/frontend.mp4" type="video/mp4" />
               </video>
+
 
               <!-- IMAGE VERSION — uncomment this and comment the video tag above to switch to images
         <img class="skills-img" id="skillsImg" src="skills/frontend.webp" alt="Frontend Development">
@@ -655,8 +660,16 @@
             <article class="proj-card" data-pos="0">
               <div class="proj-media">
                 <div class="proj-media-scroll">
-                  <img class="proj-img" src="" alt="" />
+                  <img class="proj-img" src="" alt="projects images" />
                 </div>
+
+                <button class="proj-scroll-cue" type="button">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M6 13l6 6 6-6"/>
+    </svg>
+    Scroll
+  </button>
+  
               </div>
               <div class="proj-text">
                 <h3 class="proj-title"></h3>
