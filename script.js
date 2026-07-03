@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ---------- ROTATING ROLE TEXT (bounce out / bounce in) ---------- */
   const roles = [
-    'an AI‑Powered Full Stack Engineer',
+    'an AI Full Stack Engineer',
     'a Website Developer',
     'a Mobile App Developer',
     'a Website Designer',
@@ -361,6 +361,8 @@ const projects = [
     if (dx < 0) next(); else prev();
   }, { passive: true });
 
+  
+
   setup();
 })();
 /* ---------- SKILLS TABS ---------- */
@@ -402,6 +404,38 @@ const projects = [
       list: ['WebFlow', 'WordPress / Elementor', 'Graphics Design', 'Design Systems', 'UI/UX Design', 'Wireframing', 'Prototyping', 'Wix']
     }
   };
+
+/* ---------- SKILLS TABS: arrow scroll + advance ---------- */
+(() => {
+  const wrap = document.getElementById('skillsTabsWrap');
+  const track = document.getElementById('skillsTabs');
+  const prevBtn = document.getElementById('skillsTabPrev');
+  const nextBtn = document.getElementById('skillsTabNext');
+  if (!wrap || !track) return;
+
+  const tabs = Array.from(track.querySelectorAll('.skill-tab'));
+
+  const goTo = (dir) => {
+    const activeIndex = tabs.findIndex(t => t.classList.contains('is-active'));
+    const nextIndex = dir === 1
+      ? Math.min(activeIndex + 1, tabs.length - 1)
+      : Math.max(activeIndex - 1, 0);
+    if (nextIndex === activeIndex) return;
+    tabs[nextIndex].click();
+    tabs[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  };
+
+  nextBtn.addEventListener('click', () => goTo(1));
+  prevBtn.addEventListener('click', () => goTo(-1));
+
+  const toggleArrows = () => {
+    prevBtn.style.display = track.scrollLeft <= 4 ? 'none' : 'flex';
+    nextBtn.style.display = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4 ? 'none' : 'flex';
+  };
+  track.addEventListener('scroll', toggleArrows);
+  window.addEventListener('resize', toggleArrows);
+  toggleArrows();
+})();
 
   const tabs = document.querySelectorAll('.skill-tab');
   const title = document.getElementById('skillsContentTitle');
@@ -477,4 +511,45 @@ const projects = [
   });
 
   renderSkill(tabs[0].dataset.skill, false);
+})();
+
+/* ---------- PROJECT SCROLL CUE (always sticks to active card) ---------- */
+(() => {
+  const slider = document.getElementById('projectsSlider');
+  if (!slider) return;
+
+  const cue = document.createElement('button');
+  cue.type = 'button';
+  cue.className = 'proj-scroll-cue';
+  cue.innerHTML = `
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M6 13l6 6 6-6"/>
+    </svg>
+    Scroll
+  `;
+
+  const attachToActive = () => {
+    const activeMedia = slider.querySelector('.proj-card[data-pos="0"] .proj-media');
+    if (activeMedia && cue.parentElement !== activeMedia) {
+      activeMedia.appendChild(cue);
+    }
+  };
+
+  cue.addEventListener('click', () => {
+    const scrollBox = cue.parentElement?.querySelector('.proj-media-scroll');
+    if (scrollBox) scrollBox.scrollBy({ top: 200, behavior: 'smooth' });
+  });
+
+  slider.addEventListener('scroll', (e) => {
+    const scrollBox = e.target.closest('.proj-media-scroll');
+    if (!scrollBox) return;
+    scrollBox.classList.toggle('is-scrolled', scrollBox.scrollTop > 12);
+  }, true);
+
+  const observer = new MutationObserver(attachToActive);
+  slider.querySelectorAll('.proj-card').forEach(card => {
+    observer.observe(card, { attributes: true, attributeFilter: ['data-pos'] });
+  });
+
+  attachToActive();
 })();
