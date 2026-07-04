@@ -1065,6 +1065,11 @@ ul{ list-style:none; }
   align-items:start;
 }
 
+.cta-text,
+.cta-form{
+  min-width:0;
+}
+
 .cta-title{
   font-family:var(--font-display);
   font-weight:600;
@@ -1099,6 +1104,8 @@ ul{ list-style:none; }
   font-weight:600;
   font-size:0.98rem;
   width:fit-content;
+  max-width:100%;
+  overflow-wrap:anywhere;
   transition:color .25s ease, transform .25s ease;
 }
 .cta-contact-item:hover{ color:var(--accent-1); transform:translateX(4px); }
