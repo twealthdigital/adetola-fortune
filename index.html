@@ -47,8 +47,6 @@
           <a href="#about" class="nav-link">About</a>
           <a href="#skills" class="nav-link">Skills</a>
           <a href="#projects" class="nav-link">Projects</a>
-          <a href="#blog" class="nav-link">Blog</a>
-          <a href="#contact" class="nav-link">Contact</a>
         </nav>
 
         <div class="header-actions">
@@ -124,8 +122,6 @@
         <a href="#about" class="mobile-link">About</a>
         <a href="#skills" class="mobile-link">Skills</a>
         <a href="#projects" class="mobile-link">Projects</a>
-        <a href="#blog" class="mobile-link">Blog</a>
-        <a href="#contact" class="mobile-link">Contact</a>
         <a href="#contact" class="btn btn-primary mobile-cta">
           Hire Me
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -165,7 +161,7 @@
               <span class="role-prefix">I'm</span>
               <span class="role-rotator" id="roleRotator">
                 <span class="role-word is-current"
-                  >an AI-Powered Full Stack Engineer</span
+                  >an AI Full Stack Engineer</span
                 >
               </span>
             </div>
@@ -520,8 +516,8 @@
               </div>
               <div class="stat-item">
                 <span class="stat-value"
-                  ><span class="stat-number" data-target="10">0</span
-                  ><span class="stat-plus">+</span></span
+                  ><span class="stat-number" data-target="0">0</span> <span class="stat-number" data-target="06">0</span
+                  ></span
                 >
                 <span class="stat-label">Projects Done</span>
               </div>
@@ -618,7 +614,7 @@
             <div>
               <p class="eyebrow"><span class="eyebrow-dot"></span>Projects</p>
               <h2 class="projects-title">
-                Selected <span class="accent-text">Work</span>
+                <span class="accent-text">06 </span>Selected <span class="accent-text">Works</span>
               </h2>
             </div>
             <div class="slider-nav">
@@ -813,18 +809,214 @@
         </div>
       </section>
 
-      <!-- placeholder sections so anchors/scroll behavior work while you build the rest -->
+      <!-- ============ CTA / CONTACT ============ -->
+      <section id="contact" class="cta-section">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <div class="cta-inner">
+          <div class="cta-text">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>Let's Work Together</p>
+            <h2 class="cta-title">
+              Got a project in mind?
+              <span class="accent-text">Let's build it.</span>
+            </h2>
+            <p class="cta-desc">
+              Whether it's a full product, an AI feature, or just an idea
+              you're chasing, send a message and let's talk about it...
+            </p>
 
-      <section id="skills" class="placeholder-section">
-        <p>Skills section — coming next.</p>
-      </section>
-      <section id="blog" class="placeholder-section">
-        <p>Blog section — coming next.</p>
-      </section>
-      <section id="contact" class="placeholder-section">
-        <p>Contact section — coming next.</p>
+            <div class="cta-contact-list">
+              <a href="mailto:adeolafortuneadeola12345@gmail.com" class="cta-contact-item">
+                <span class="cta-contact-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 6.5C3 5.67 3.67 5 4.5 5H19.5C20.33 5 21 5.67 21 6.5V17.5C21 18.33 20.33 19 19.5 19H4.5C3.67 19 3 18.33 3 17.5V6.5Z" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M4 6.5L12 13L20 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                adeolafortuneadeola12345@gmail.com
+              </a>
+              <a href="tel:+2347025723662" class="cta-contact-item">
+                <span class="cta-contact-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M6.6 10.8C7.9 13.4 10 15.5 12.6 16.8L14.6 14.8C14.9 14.5 15.3 14.4 15.7 14.5C16.9 14.9 18.2 15.1 19.5 15.1C20.1 15.1 20.5 15.6 20.5 16.1V19.5C20.5 20.1 20.1 20.5 19.5 20.5C10.7 20.5 3.5 13.3 3.5 4.5C3.5 3.9 3.9 3.5 4.5 3.5H7.9C8.5 3.5 8.9 3.9 8.9 4.5C8.9 5.8 9.1 7.1 9.5 8.3C9.6 8.7 9.5 9.1 9.2 9.4L6.6 10.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                +2347025723662
+              </a>
+            </div>
+          </div>
+
+          <form class="cta-form" id="ctaForm" novalidate>
+            <input type="hidden" name="access_key" value="74d2410c-b274-45f9-89bb-8f1ce67f5d2f" />
+            <input type="hidden" name="subject" value="New message from your portfolio site" />
+            <div class="form-row">
+              <div class="form-field">
+                <label for="ctaName">Name</label>
+                <input type="text" id="ctaName" name="name" placeholder="Your name" required />
+              </div>
+              <div class="form-field">
+                <label for="ctaEmail">Email</label>
+                <input type="email" id="ctaEmail" name="email" placeholder="you@email.com" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="ctaSubject">Subject</label>
+              <input type="text" id="ctaSubject" name="subject" placeholder="What's this about?" />
+            </div>
+
+            <div class="form-field">
+              <label for="ctaMessage">Message</label>
+              <textarea id="ctaMessage" name="message" rows="4" placeholder="Tell me a bit about your project..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg form-submit">
+              Submit
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+
+            <p class="form-note" id="formNote" aria-live="polite"></p>
+          </form>
+        </div>
       </section>
     </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer" id="siteFooter">
+      <div class="footer-glow" aria-hidden="true"></div>
+
+      <div class="footer-top">
+        <div class="footer-inner footer-grid">
+          <div class="footer-col footer-brand-col">
+            <a href="#home" class="brand footer-brand">
+              <span class="brand-mark">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18L3 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M15 6L21 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="brand-name">Fortune<span class="brand-dot">.</span>dev</span>
+            </a>
+
+            <p class="footer-tagline">
+              AI-powered full stack engineer designing and building
+              production-grade products end to end.
+            </p>
+
+            <div class="footer-socials">
+              <a href="https://github.com/twealthdigital" class="footer-social" aria-label="GitHub" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49v-1.9c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.2C22 6.58 17.52 2 12 2Z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/adetola-fortune-7a5088364" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5C4.14 3.5 3.25 4.4 3.25 5.5C3.25 6.6 4.14 7.5 5.25 7.5C6.36 7.5 7.25 6.6 7.25 5.5C7.25 4.4 6.36 3.5 5.25 3.5ZM20.5 20.5V13.9C20.5 10.5 18.9 9 16.6 9C14.75 9 13.8 10.02 13.35 11H13.3V8.5H10.06C10.1 9.3 10.06 20.5 10.06 20.5H13.43V13.98C13.43 13.63 13.45 13.28 13.56 13.03C13.85 12.32 14.5 11.58 15.6 11.58C17.05 11.58 17.13 12.86 17.13 14.06V20.5H20.5Z"/>
+                </svg>
+              </a>
+              <a href="https://x.com/twealth_digital" class="footer-social" aria-label="X (Twitter)" target="_blank" rel="noopener">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.24 3H21.5L14.5 10.9L22.7 21H16.3L11.3 14.6L5.6 21H2.3L9.7 12.6L1.8 3H8.4L12.9 8.8L18.24 3ZM17.1 19.1H18.9L7.5 4.8H5.6L17.1 19.1Z"/>
+                </svg>
+              </a>
+              <!-- <a href="#" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+                  <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
+                </svg>
+              </a> -->
+              <a href="https://wa.me/2347025723662?text=Hello,%20Can%20you%20help%20me%20with%20a%20website?." class="footer-social" aria-label="WhatsApp" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.02 2C6.5 2 2.04 6.46 2.04 12c0 1.85.5 3.58 1.36 5.07L2 22l5.08-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.54 22 12S17.55 2 12.02 2ZM12 20.15c-1.6 0-3.1-.43-4.4-1.2l-.32-.19-3.02.79.8-2.94-.2-.3A8.14 8.14 0 0 1 3.85 12c0-4.5 3.66-8.15 8.16-8.15 4.5 0 8.15 3.65 8.15 8.15 0 4.5-3.65 8.15-8.16 8.15Zm4.48-6.1c-.24-.12-1.44-.71-1.66-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.78.95-.14.16-.28.18-.53.06-.24-.12-1.02-.38-1.95-1.2-.72-.64-1.2-1.44-1.35-1.68-.14-.24-.02-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42-.14-.01-.3-.01-.46-.01a.9.9 0 0 0-.64.3c-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-col-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-blog-col" id="blog">
+            <h4 class="footer-col-title">From the Blog</h4>
+            <div class="footer-blog-list">
+              <article class="footer-blog-card" data-coming-soon>
+                <div class="footer-blog-thumb" aria-hidden="true">
+                  <span class="footer-blog-tag">Coming Soon</span>
+                </div>
+                <div class="footer-blog-body">
+                  <h5 class="footer-blog-title">AI-Powered Accomodation Platform..</h5>
+                  <span class="footer-blog-date">Project dropping soon</span>
+                </div>
+              </article>
+              <article class="footer-blog-card" data-coming-soon>
+                <div class="footer-blog-thumb" aria-hidden="true">
+                  <span class="footer-blog-tag">Coming Soon</span>
+                </div>
+                <div class="footer-blog-body">
+                  <h5 class="footer-blog-title">AI-Powered Tools..</h5>
+                  <span class="footer-blog-date">Project dropping soon</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="footer-col footer-map-col">
+            <h4 class="footer-col-title">Where I'm Based</h4>
+            <div class="footer-map-frame">
+              <iframe
+                class="footer-map-iframe"
+                src="https://www.google.com/maps?q=Adekunle+Ajasin+University,+Akungba-Akoko,+Ondo+State&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+                title="Map — Adekunle Ajasin University, Akungba-Akoko"
+              ></iframe>
+              <div class="footer-map-badge">
+                <span class="map-pin-dot" aria-hidden="true"></span>
+                Adekunle Ajasin University, Akungba-Akoko, Ondo State
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-inner footer-bottom-inner">
+          <p class="footer-copy">
+            &copy; <span id="footerYear">2026</span> Adetola Fortune. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============ COMING SOON MODAL ============ -->
+    <div class="modal-overlay" id="comingSoonModal" aria-hidden="true">
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="modalClose" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="modal-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 7V12L15 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="modalTitle">Coming Soon</h3>
+        <p class="modal-desc">This Project would be out soon.....</p>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
