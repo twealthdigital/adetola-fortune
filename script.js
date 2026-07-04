@@ -190,11 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
- /* ---------- PROJECTS SLIDER (infinite, 5-node recycling) ---------- */
+ /* ---------- PROJECTS SLIDER (infinite, 10-node recycling) ---------- */
 const projects = [
-  { title: "YTGT Corporate Website", sub: "Technology Company • Website Design, Development & UIUX Services ", desc: "Designed and developed a modern corporate website for YTGT, featuring responsive design, engaging animations, service showcases, and a conversion-focused user experience to strengthen the company's online presence.", img: "ytreakproject.webp", link: "http://ytreakglobaltechnology.vercel.app/" },
-  { title: "MM Beauty Ecommerce Website", sub: "Ecommerce Company • Beauty, Baby & Skin Care Products", desc: "Designed and developed a clean, conversion-focused online store for Margaret's Market, featuring beauty product collections, category browsing, customer reviews, promotional sections, and a seamless shopping experience optimized for desktop and mobile devices.", img: "mmbeautyproject.webp", link: "https://mmbeautyshop.com/" },
-  { title: "Project Three", sub: "Cyber Company • CyberSecurity, Ethical Hacking & Pen-Testing Website", desc: "Designed and developed a modern cybersecurity website for Valiant Cyber Solutions, showcasing penetration testing, red teaming, vCISO services, threat intelligence, and a professional, conversion-focused user experience.", img: "valiantcyberproject.webp", link: "https://valiantcyber.io/" },
+  { title: "YTREAK GLOBAL TECHNOLOGY", sub: "Technology Company • Website Design, Development & UIUX Services ", desc: "Designed and developed a modern corporate website for YTGT, featuring responsive design, engaging animations, service showcases, and a conversion-focused user experience to strengthen the company's online presence.", img: "ytreakproject.webp", link: "http://ytreakglobaltechnology.vercel.app/" },
+  { title: "MM BEAUTY", sub: "Ecommerce Company • Beauty, Baby & Skin Care Products", desc: "Designed and developed a clean, conversion-focused online store for Margaret's Market, featuring beauty product collections, category browsing, customer reviews, promotional sections, and a seamless shopping experience optimized for desktop and mobile devices.", img: "mmbeautyproject.webp", link: "https://mmbeautyshop.com/" },
+  { title: "VALIENTCYBER", sub: "Cyber Company • CyberSecurity, Ethical Hacking & Pen-Testing Website", desc: "Designed and developed a modern cybersecurity website for Valiant Cyber Solutions, showcasing penetration testing, red teaming, vCISO services, threat intelligence, and a professional, conversion-focused user experience.", img: "valiantcyberproject.webp", link: "https://valiantcyber.io/" },
+  { title: "NEXA INFRA & TECHNOLOGIES", sub: "Energy & Infrastructure Company • Electrical, Civil Engineering & Energy Solutions Website", desc: "Designed and developed a corporate website for NEXA INFRA & TECHNOLOGIES, showcasing electrical works, building and civil engineering, and energy solutions", img: "nexaproject.webp", link: "https://nexa-infra.com/" },
+  { title: "JAAM POWER WASHING", sub: "Home Services Company • Commercial & HOA Exterior Cleaning Website", desc: "Designed and developed a commercial website for JAAM Power Washing, showcasing exterior hard surface cleaning services for commercial properties and HOA communities in Corona, Eastvale, and Riverside.", img: "jaampowerwashingproject.webp", link: "https://jaampowerwashing.com/" },
+  { title: "BUSINESS SOLUTIONS ACADEMY", sub: "Coaching Business • Course Creation Membership & Sales Website", desc: "Designed and developed a website for Business Solutions Academy's Course Creation Mastermind, a coaching program that helps coaches and consultants package their expertise into a structured, sellable online course.", img: "businesssolutionsacademyproject.webp", link: "https://businesssolutionsacademy.com/" },
   // just keep adding objects here — 6, 20, 100, doesn't matter, only 5 DOM cards ever exist
 ];
 
@@ -552,4 +555,92 @@ const projects = [
   });
 
   attachToActive();
+})();
+/* ---------- FOOTER: DYNAMIC YEAR ---------- */
+(() => {
+  const yearEl = document.getElementById('footerYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+})();
+
+/* ---------- CTA FORM SUBMIT ---------- */
+/* Plug your form backend in here later — e.g. Formspree, EmailJS, or your own API endpoint. */
+(() => {
+  const form = document.getElementById('ctaForm');
+  const note = document.getElementById('formNote');
+  if (!form || !note) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !email || !message) {
+      note.textContent = 'Please fill in your name, email and message.';
+      note.className = 'form-note is-error';
+      return;
+    }
+
+    const submitBtn = form.querySelector('.form-submit');
+    const originalBtnHTML = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending...';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        note.textContent = `Thanks ${name.split(' ')[0]}! Your message has been sent.`;
+        note.className = 'form-note is-success';
+        form.reset();
+      } else {
+        note.textContent = 'Something went wrong. Please try again or email me directly.';
+        note.className = 'form-note is-error';
+      }
+    } catch (err) {
+      note.textContent = 'Network error. Please email me directly.';
+      note.className = 'form-note is-error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHTML;
+    }
+  });
+})();
+
+
+/* ---------- COMING SOON MODAL ---------- */
+(() => {
+  const modal = document.getElementById('comingSoonModal');
+  const closeBtn = document.getElementById('modalClose');
+  const triggers = document.querySelectorAll('[data-coming-soon]');
+  if (!modal || !triggers.length) return;
+
+  const openModal = () => {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+  };
+  const closeModal = () => {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+  };
+
+  triggers.forEach((card) => {
+    card.style.cursor = 'pointer';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('click', openModal);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 })();
