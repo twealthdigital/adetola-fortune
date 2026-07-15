@@ -288,7 +288,7 @@ ul{ list-style:none; }
   letter-spacing:-0.02em;
   margin-bottom:20px;
 }
-.hero-title-line{ display:block; }
+.hero-title-line{ display:block;   font-size: 50px;}
 .accent-text{
   background:var(--accent-grad);
   -webkit-background-clip:text;
@@ -675,7 +675,7 @@ ul{ list-style:none; }
 @media (max-width:560px){
   .hero{ padding:calc(var(--header-h) + 60px) 20px 60px; align-items:center; }
   .hero-inner{ grid-template-columns:1fr; }
-  .hero-title{ font-size:2rem; }
+  .hero-title{ font-size:2rem;}
   .hero-cta-row{ flex-direction:column; align-items:stretch; }
   .hero-cta-row .btn{ width:100%; }
   .hero-visual{ display:none; }
