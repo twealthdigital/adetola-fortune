@@ -1,3 +1,47 @@
+/* ---------- ROUNDED FAVICON (uses hero image) ---------- */
+(function setRoundedFavicon() {
+  const src = 'mypics.webp'; // same image used in the hero section
+  const size = 64;
+
+  const img = new Image();
+  img.src = src;
+
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+
+    // circular clip
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+
+    // cover-fit the image inside the circle
+    const scale = Math.max(size / img.width, size / img.height);
+    const w = img.width * scale;
+    const h = img.height * scale;
+    ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
+    ctx.restore();
+
+    let link = document.getElementById('faviconLink');
+    if (!link) {
+      link = document.createElement('link');
+      link.id = 'faviconLink';
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.type = 'image/png';
+    link.href = canvas.toDataURL('image/png');
+  };
+
+  img.onerror = () => {
+    console.warn('Favicon: could not load', src);
+  };
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     
 
