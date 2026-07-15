@@ -245,6 +245,10 @@ const projects = [
   // just keep adding objects here — 6, 20, 100, doesn't matter, only 5 DOM cards ever exist
 ];
 
+// preload every project image up front so the first several arrow clicks
+// don't stall waiting on a fresh network fetch + decode mid-transition
+projects.forEach(p => { new Image().src = p.img; });
+
 (() => {
   const slider = document.getElementById('projectsSlider');
   if (!slider) return;
