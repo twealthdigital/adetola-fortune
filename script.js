@@ -95,14 +95,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- ACTIVE NAV LINK SYNC (desktop + mobile) ---------- */
   const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
+  let navLocked = false; // true while a nav click is smooth scrolling
+  let navIdleTimer = null;
+
+  const setActiveNav = (hash) => {
+    navLinks.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === hash));
+  };
+
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      navLinks.forEach(l => l.classList.remove('is-active'));
-      document
-        .querySelectorAll(`a[href="${link.getAttribute('href')}"]`)
-        .forEach(match => match.classList.add('is-active'));
+      navLocked = true; // stop the spy flickering through sections mid scroll
+      setActiveNav(link.getAttribute('href'));
     });
   });
+
+  /* ---------- SCROLL SPY: active tab follows the section in view ---------- */
+  const spyIds = Array.from(new Set(
+    Array.from(document.querySelectorAll('.nav-link')).map(l => l.getAttribute('href').slice(1))
+  ));
+  const spySections = spyIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  const updateNavFromScroll = () => {
+    const line = window.innerHeight * 0.35; // reading line, 35% down the viewport
+    let currentId = spySections[0] ? spySections[0].id : null;
+    spySections.forEach(sec => {
+      if (sec.getBoundingClientRect().top <= line) currentId = sec.id;
+    });
+    // at the very bottom keep the last tab lit even if the last section is short
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+      currentId = spySections[spySections.length - 1].id;
+    }
+    if (currentId) setActiveNav('#' + currentId);
+  };
+
+  let spyTicking = false;
+  window.addEventListener('scroll', () => {
+    if (navLocked) {
+      // unlock once scrolling has been idle for a moment
+      clearTimeout(navIdleTimer);
+      navIdleTimer = setTimeout(() => { navLocked = false; updateNavFromScroll(); }, 150);
+      return;
+    }
+    if (spyTicking) return;
+    spyTicking = true;
+    requestAnimationFrame(() => { updateNavFromScroll(); spyTicking = false; });
+  }, { passive: true });
+
+  if (spySections.length) updateNavFromScroll();
 
 /* ---------- ROTATING ROLE TEXT (bounce out / bounce in) ---------- */
   const roles = [
@@ -247,7 +286,16 @@ const projects = [
 
 // preload every project image up front so the first several arrow clicks
 // don't stall waiting on a fresh network fetch + decode mid-transition
-projects.forEach(p => { new Image().src = p.img; });
+// deferred until the page has loaded and the browser is idle, so these images
+// don't compete with the hero and fonts on first paint
+const preloadProjectImages = () => projects.forEach(p => { new Image().src = p.img; });
+window.addEventListener('load', () => {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(preloadProjectImages, { timeout: 4000 });
+  } else {
+    setTimeout(preloadProjectImages, 1500);
+  }
+});
 
 (() => {
   const slider = document.getElementById('projectsSlider');
@@ -500,6 +548,8 @@ projects.forEach(p => { new Image().src = p.img; });
   if (!tabs.length) return;
 
   let switching = false;
+  let currentSkillKey = null;
+  let skillsNearView = false; // video stays unloaded until the section is close
 
   const applySkill = (key) => {
     const data = skillsData[key];
@@ -515,7 +565,8 @@ projects.forEach(p => { new Image().src = p.img; });
       list.appendChild(li);
     });
 
-    if (video) {
+    currentSkillKey = key;
+    if (video && skillsNearView) {
       const source = video.querySelector('source');
       source.src = data.video;
       video.load();
@@ -562,6 +613,21 @@ projects.forEach(p => { new Image().src = p.img; });
   });
 
   renderSkill(tabs[0].dataset.skill, false);
+
+  // load the first video only when the skills section is about to be seen
+  const skillsSection = document.getElementById('skills');
+  if (video && skillsSection && 'IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      skillsNearView = true;
+      applySkill(currentSkillKey);
+      videoObserver.disconnect();
+    }, { rootMargin: '400px 0px' });
+    videoObserver.observe(skillsSection);
+  } else {
+    skillsNearView = true;
+    applySkill(currentSkillKey);
+  }
 })();
 
 /* ---------- PROJECT SCROLL CUE (always sticks to active card) ---------- */
